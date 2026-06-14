@@ -1,0 +1,67 @@
+# Wiring Reference
+
+## 1. Basic Setup — Soil Moisture + Relay + Solenoid Valve
+
+```
+Arduino Uno                  Soil Moisture Sensor
+───────────                  ────────────────────
+   A0        ◄──────────────  AOUT (Analog Output)
+   5V        ──────────────►  VCC
+   GND       ──────────────►  GND
+
+
+Arduino Uno                  Relay Module
+───────────                  ────────────
+   Pin 2     ──────────────►  IN  (Signal)
+   5V        ──────────────►  VCC
+   GND       ──────────────►  GND
+
+Relay Module                 Solenoid Valve
+────────────                 ──────────────
+   COM       ──────────────►  One terminal of valve
+   NO        ──────────────►  Power supply (+)
+                              Other terminal → GND
+```
+
+> **NO** = Normally Open terminal. The solenoid valve energizes (opens) when the relay closes the circuit.
+
+---
+
+## 2. Bluetooth Extension — Adding HC-05
+
+```
+Arduino Uno                  HC-05 Bluetooth Module
+───────────                  ──────────────────────
+   Pin 0 (RX)  ◄──────────   TX
+   Pin 1 (TX)  ──────────►   RX  (use 1kΩ + 2kΩ voltage divider)
+   5V          ──────────►   VCC
+   GND         ──────────►   GND
+```
+
+> ⚠️ The HC-05 RX pin operates at 3.3V logic. Use a voltage divider (1kΩ and 2kΩ resistors) between Arduino TX (5V) and HC-05 RX to avoid damaging the module.
+
+---
+
+## 3. Key Pin Summary
+
+| Signal | Arduino Pin | Connected To |
+|---|---|---|
+| Soil moisture reading | A0 | Sensor AOUT |
+| Relay control | D2 | Relay IN |
+| Bluetooth TX (data out) | D1 (TX) | HC-05 RX |
+| Bluetooth RX (commands in) | D0 (RX) | HC-05 TX |
+| Power | 5V | All modules VCC |
+| Ground | GND | All modules GND |
+
+---
+
+## 4. Moisture Threshold Values
+
+| Sensor Reading (Raw) | Condition |
+|---|---|
+| ~300 (thresholdMin) | Very wet soil |
+| ~800 (thresholdMax) | Very dry soil |
+| Mapped < 40% | Relay ON → Valve opens |
+| Mapped ≥ 40% | Relay OFF → Valve closed |
+
+Adjust `thresholdMin`, `thresholdMax`, and the `sensorValue < 40` threshold in the code to match your specific soil type and sensor.
