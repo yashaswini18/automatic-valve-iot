@@ -1,0 +1,24 @@
+# Hardware Components List (BOM)
+
+| # | Component | Specification | Quantity | Purpose |
+|---|---|---|---|---|
+| 1 | Arduino Uno | ATmega328P, 14 digital I/O, 6 analog inputs, 5V/3.3V | 1 | Main microcontroller |
+| 2 | Soil Moisture Sensor | Analog output, 3.3V–5V, FC-28 or equivalent | 1 | Reads soil wetness |
+| 3 | Relay Module | 5V single-channel, 250VAC/10A or 30VDC/10A | 1 | Switches solenoid valve |
+| 4 | Solenoid Valve | 12V DC, normally closed, 1/2 inch | 1 | Controls water flow |
+| 5 | HC-05 Bluetooth Module | Serial UART, 2.4GHz, 3.3V logic | 1 | Wireless data & control |
+| 6 | Breadboard | 830 tie-points (full size) | 1 | Prototyping |
+| 7 | Power Supply | 7–12V DC, min 1A | 1 | Powers Arduino + valve |
+| 8 | Resistors | 1kΩ, 2kΩ (for voltage divider) | 2 | HC-05 RX protection |
+| 9 | Jumper Wires | Male-to-male, Male-to-female | 1 set | Connections |
+
+---
+
+## Optional / Future Upgrades
+
+| Component | Purpose |
+|---|---|
+| ESP8266 / ESP32 | Replace HC-05 for Wi-Fi + cloud connectivity |
+| DHT11 / DHT22 | Add temperature & humidity sensing |
+| Rain sensor | Prevent irrigation when it's raining |
+| Solar panel + LiPo battery | Field-deployable power management |
